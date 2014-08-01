@@ -44,13 +44,16 @@ The message you want to show before each chunk.
 The message you want to show after each chunk.
 
 #### `prefix` *String*
-A constant value to prefix to each of the filenames in the chunk.
+A constant value to prefix to each filename in the chunk.
 
 #### `suffix` *String*
-A constant value to suffix to each of the filenames in the chunk.
+A constant value to suffix to each filename in the chunk.
 
 #### `extname` *String*
-A constant value to set as the extension for each of the filenames in the chunk.
+A constant value to set as the extension for each filename in the chunk.
+
+#### `basename` *String*
+A constant value to set as the basename for each filename in the chunk.
 
 #### `colors=true` *Boolean*
 Whether or not to turn off colors on the output.

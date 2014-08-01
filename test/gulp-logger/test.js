@@ -81,12 +81,12 @@
             });
     });
 
-    test('colors', function (t) {
+    test('extname', function (t) {
         t.plan(1);
 
         gulp.src('test/gulp-logger/files-to-stream/**/*.js')
             .pipe(logger({
-                colors: false
+                extname: '.extnameTest!'
             }))
             .on('data', function () {})
             .on('end', function () {
@@ -94,11 +94,25 @@
             });
     });
 
+    test('basename', function (t) {
+        t.plan(1);
+
+        gulp.src('test/gulp-logger/files-to-stream/**/*.js')
+            .pipe(logger({
+                basename: 'basenameTest!'
+            }))
+            .on('data', function () {})
+            .on('end', function () {
+                t.equals(true, true);
+            });
+    });
+
+
     test('display:default', function (t) {
         t.plan(1);
 
         gulp.src('test/gulp-logger/files-to-stream/**/*.js')
-            .pipe(logger())
+            .pipe(logger({}))
             .on('data', function () {})
             .on('end', function () {
                 t.equals(true, true);

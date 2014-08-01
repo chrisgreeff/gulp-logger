@@ -6,6 +6,7 @@
         through = require('through2'),
         chalk = require('chalk'),
         utils = require('./lib/utils.js'),
+        rename = require('rename'),
 
         beforeComplete = false,
 
@@ -20,48 +21,70 @@
                 afterEach = fnOpts.afterEach,
                 prefix = fnOpts.prefix,
                 suffix = fnOpts.suffix,
-                filePathToProcess;
-
-            filePathToProcess = filePath;
+                extname = fnOpts.extname,
+                basename = fnOpts.basename,
+                renameConfig = {},
+                filePathToProcess = [],
+                newPath,
+                oldBasename,
+                newBasename;
 
             if (before && !beforeComplete) {
-                console.log(before);
+                console.log(chalk.cyan(before));
                 beforeComplete = true;
             }
 
-            if (afterEach) {
-                filePathToProcess = filePathToProcess + afterEach;
+            // Path
+            switch (display) {
+                case 'name':
+                    newPath = '';
+                    break;
+                case 'abs':
+                    newPath = path.dirname(filePath) + '/';
+                    break;
+                case 'rel':
+                    newPath = path.dirname(utils.getRelativePath(filePath)) + '/';
+                    break;;
             }
 
+            filePathToProcess.push(chalk.gray(newPath));
+
+            // Basename
+
+            oldBasename = path.basename(filePath);
+
             if (prefix) {
-                filePathToProcess = utils.addPrefix({
-                    filePath: filePathToProcess,
-                    prefix: prefix
-                });
+                renameConfig.prefix = chalk.magenta(prefix);
             }
 
             if (suffix) {
-                filePathToProcess = utils.addSuffix({
-                    filePath: filePath,
-                    filePathToProcess: filePathToProcess,
-                    suffix: suffix
-                });
+                renameConfig.suffix = chalk.magenta(suffix);
             }
 
-            switch (display) {
-                case 'abs':
-                    break;
-                case 'name':
-                    filePathToProcess = path.basename(filePathToProcess);
-                    break;
-                case 'rel':
-                default:
-                    filePathToProcess = utils.getRelativePath(filePathToProcess);
-                    break;
+            if (extname) {
+                renameConfig.extname = chalk.magenta(extname);
             }
+
+            if (basename) {
+                renameConfig.basename = chalk.magenta(basename);
+            }
+
+            if (Object.keys(renameConfig).length) {
+                newBasename = chalk.gray(path.basename(rename(filePath, renameConfig)));
+            } else {
+                newBasename = chalk.gray(oldBasename);
+            }
+
+            filePathToProcess.push(newBasename);
+
+            filePathToProcess = filePathToProcess.join('');
 
             if (beforeEach) {
-                filePathToProcess = beforeEach + filePathToProcess;
+                filePathToProcess = chalk.yellow(beforeEach) + filePathToProcess;
+            }
+
+            if (afterEach) {
+                filePathToProcess = filePathToProcess + chalk.yellow(afterEach);
             }
 
             console.log(filePathToProcess);
@@ -69,7 +92,7 @@
 
         function loggerEndHandler(flushCallback) {
             if (typeof fnOpts === 'object' && fnOpts.after) {
-                console.log(fnOpts.after);
+                console.log(chalk.cyan(fnOpts.after));
             }
 
             flushCallback();
