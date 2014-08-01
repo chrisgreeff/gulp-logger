@@ -49,6 +49,9 @@ A constant value to prefix to each of the filenames in the chunk.
 #### `suffix` *String*
 A constant value to suffix to each of the filenames in the chunk.
 
+#### `extname` *String*
+A constant value to set as the extension for each of the filenames in the chunk.
+
 #### `colors=true` *Boolean*
 Whether or not to turn off colors on the output.
 

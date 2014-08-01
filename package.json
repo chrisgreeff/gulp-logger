@@ -1,0 +1,29 @@
+{
+  "name": "gulp-logger",
+  "version": "0.0.0",
+  "description": "Gulp plugin for logging stream stages, transformation and progress",
+  "main": "index.js",
+  "scripts": {
+    "test": "node test/gulp-logger/test.js"
+  },
+  "keywords": [
+    "gulp",
+    "gulpplugin",
+    "log",
+    "logger",
+    "debug",
+    "output",
+    "progress"
+  ],
+  "author": "Chris Greeff",
+  "license": "ISC",
+  "dependencies": {
+    "chalk": "^0.5.1",
+    "through2": "^0.5.1"
+  },
+  "devDependencies": {
+    "assert": "^1.1.1",
+    "colored-tape": "^1.0.1",
+    "gulp": "^3.8.6"
+  }
+}
