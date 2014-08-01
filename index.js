@@ -9,10 +9,19 @@
         rename = require('rename'),
 
         beforeComplete = false,
+        colorsEnabled = true,
 
         GulpLogger;
 
     GulpLogger = function(fnOpts, opts) {
+
+        function colorTrans(message, color) {
+            if (colorsEnabled) {
+                return chalk[color](message);
+            } else {
+                return message;
+            }
+        };
 
         function processOptions(filePath) {
             var display = fnOpts.display || 'rel',
@@ -23,14 +32,19 @@
                 suffix = fnOpts.suffix,
                 extname = fnOpts.extname,
                 basename = fnOpts.basename,
+                colors = fnOpts.colors,
                 renameConfig = {},
                 filePathToProcess = [],
                 newPath,
                 oldBasename,
                 newBasename;
 
+            if (typeof colors !== 'undefined') {
+                colorsEnabled = colors;
+            }
+
             if (before && !beforeComplete) {
-                console.log(chalk.cyan(before));
+                console.log(colorTrans(before, 'cyan'));
                 beforeComplete = true;
             }
 
@@ -47,32 +61,32 @@
                     break;;
             }
 
-            filePathToProcess.push(chalk.gray(newPath));
+            filePathToProcess.push(colorTrans(newPath, 'gray'));
 
             // Basename
 
             oldBasename = path.basename(filePath);
 
             if (prefix) {
-                renameConfig.prefix = chalk.magenta(prefix);
+                renameConfig.prefix = colorTrans(prefix, 'magenta');
             }
 
             if (suffix) {
-                renameConfig.suffix = chalk.magenta(suffix);
+                renameConfig.suffix = colorTrans(suffix, 'magenta');
             }
 
             if (extname) {
-                renameConfig.extname = chalk.magenta(extname);
+                renameConfig.extname = colorTrans(extname, 'magenta');
             }
 
             if (basename) {
-                renameConfig.basename = chalk.magenta(basename);
+                renameConfig.basename = colorTrans(basename, 'magenta');
             }
 
             if (Object.keys(renameConfig).length) {
-                newBasename = chalk.gray(path.basename(rename(filePath, renameConfig)));
+                newBasename = colorTrans(path.basename(rename(filePath, renameConfig)), 'gray');
             } else {
-                newBasename = chalk.gray(oldBasename);
+                newBasename = colorTrans(oldBasename, 'gray');
             }
 
             filePathToProcess.push(newBasename);
@@ -80,11 +94,11 @@
             filePathToProcess = filePathToProcess.join('');
 
             if (beforeEach) {
-                filePathToProcess = chalk.yellow(beforeEach) + filePathToProcess;
+                filePathToProcess = colorTrans(beforeEach, 'yellow') + filePathToProcess;
             }
 
             if (afterEach) {
-                filePathToProcess = filePathToProcess + chalk.yellow(afterEach);
+                filePathToProcess = filePathToProcess + colorTrans(afterEach, 'yellow');
             }
 
             console.log(filePathToProcess);
@@ -92,7 +106,7 @@
 
         function loggerEndHandler(flushCallback) {
             if (typeof fnOpts === 'object' && fnOpts.after) {
-                console.log(chalk.cyan(fnOpts.after));
+                console.log(colorTrans(fnOpts.after, 'cyan'));
             }
 
             flushCallback();

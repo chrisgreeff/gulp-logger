@@ -158,4 +158,17 @@
             });
     });
 
+    test('colors disabled', function (t) {
+        t.plan(1);
+
+        gulp.src('test/gulp-logger/files-to-stream/**/*.js')
+            .pipe(logger({
+                colors: false
+            }))
+            .on('data', function () {})
+            .on('end', function () {
+                t.equals(true, true);
+            });
+    });
+
 }());
