@@ -8,6 +8,7 @@
         utils = require('./lib/utils.js'),
         colorTrans = utils.colorTrans,
         processFilePath = require('./lib/process-file-path.js'),
+        processFunction = require('./lib/process-function.js'),
 
         beforeComplete = false,
         colorsEnabled = true,
@@ -37,8 +38,7 @@
             var filePath = file.path;
 
             if (typeof fnOpts === 'function') {
-                
-                fnOpts(filePath);
+                processFunction(filePath, fnOpts, opts);
             } else if (typeof fnOpts === 'object') {
                 processFilePath(filePath, fnOpts);
             } else {

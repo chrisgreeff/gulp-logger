@@ -11,4 +11,5 @@
     require('./basename.js');
     require('./display.js');
     require('./colors.js');
+    require('./function.js');
 }());
