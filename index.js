@@ -37,12 +37,8 @@
             var filePath = file.path;
 
             if (typeof fnOpts === 'function') {
-                // @todo Implement later.
-                // processFnOptions({
-                //     fn: fnOpts,
-                //     opts: opts,
-                //     filePath: filePath
-                // });
+                
+                fnOpts(filePath);
             } else if (typeof fnOpts === 'object') {
                 processFilePath(filePath, fnOpts);
             } else {

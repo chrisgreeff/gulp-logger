@@ -4,7 +4,7 @@
   "description": "Gulp plugin for logging stream stages, transformation and progress",
   "main": "index.js",
   "scripts": {
-    "test": "node test/gulp-logger/test.js"
+    "test": "node test/test.js"
   },
   "repository": {
     "type": "git",
