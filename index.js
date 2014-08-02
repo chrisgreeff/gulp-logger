@@ -6,7 +6,8 @@
         through = require('through2'),
         chalk = require('chalk'),
         utils = require('./lib/utils.js'),
-        rename = require('rename'),
+        colorTrans = utils.colorTrans,
+        processFilePath = require('./lib/process-file-path.js'),
 
         beforeComplete = false,
         colorsEnabled = true,
@@ -15,93 +16,13 @@
 
     GulpLogger = function(fnOpts, opts) {
 
-        function colorTrans(message, color) {
-            if (colorsEnabled) {
-                return chalk[color](message);
-            } else {
-                return message;
-            }
-        };
+        if (typeof fnOpts === 'object' && typeof fnOpts.colors !== 'undefined') {
+            utils.colorsEnabled = fnOpts.colors;
+        }
 
-        function processOptions(filePath) {
-            var display = fnOpts.display || 'rel',
-                before = fnOpts.before,
-                beforeEach = fnOpts.beforeEach,
-                afterEach = fnOpts.afterEach,
-                prefix = fnOpts.prefix,
-                suffix = fnOpts.suffix,
-                extname = fnOpts.extname,
-                basename = fnOpts.basename,
-                colors = fnOpts.colors,
-                renameConfig = {},
-                filePathToProcess = [],
-                newPath,
-                oldBasename,
-                newBasename;
-
-            if (typeof colors !== 'undefined') {
-                colorsEnabled = colors;
-            }
-
-            if (before && !beforeComplete) {
-                console.log(colorTrans(before, 'cyan'));
-                beforeComplete = true;
-            }
-
-            // Path
-            switch (display) {
-                case 'name':
-                    newPath = '';
-                    break;
-                case 'abs':
-                    newPath = path.dirname(filePath) + '/';
-                    break;
-                case 'rel':
-                    newPath = path.dirname(utils.getRelativePath(filePath)) + '/';
-                    break;;
-            }
-
-            filePathToProcess.push(colorTrans(newPath, 'gray'));
-
-            // Basename
-
-            oldBasename = path.basename(filePath);
-
-            if (prefix) {
-                renameConfig.prefix = colorTrans(prefix, 'magenta');
-            }
-
-            if (suffix) {
-                renameConfig.suffix = colorTrans(suffix, 'magenta');
-            }
-
-            if (extname) {
-                renameConfig.extname = colorTrans(extname, 'magenta');
-            }
-
-            if (basename) {
-                renameConfig.basename = colorTrans(basename, 'magenta');
-            }
-
-            if (Object.keys(renameConfig).length) {
-                newBasename = colorTrans(path.basename(rename(filePath, renameConfig)), 'gray');
-            } else {
-                newBasename = colorTrans(oldBasename, 'gray');
-            }
-
-            filePathToProcess.push(newBasename);
-
-            filePathToProcess = filePathToProcess.join('');
-
-            if (beforeEach) {
-                filePathToProcess = colorTrans(beforeEach, 'yellow') + filePathToProcess;
-            }
-
-            if (afterEach) {
-                filePathToProcess = filePathToProcess + colorTrans(afterEach, 'yellow');
-            }
-
-            console.log(filePathToProcess);
+        if (typeof fnOpts === 'object' && fnOpts.before && !beforeComplete) {
+            console.log(colorTrans(fnOpts.before, 'cyan'));
+            beforeComplete = true;
         }
 
         function loggerEndHandler(flushCallback) {
@@ -123,7 +44,7 @@
                 //     filePath: filePath
                 // });
             } else if (typeof fnOpts === 'object') {
-                processOptions(filePath);
+                processFilePath(filePath, fnOpts);
             } else {
                 console.log(utils.getRelativePath(filePath));
             }

@@ -6,6 +6,10 @@
   "scripts": {
     "test": "node test/gulp-logger/test.js"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/chrisgreeff/gulp-logger.git"
+  },
   "keywords": [
     "gulp",
     "gulpplugin",
