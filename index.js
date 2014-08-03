@@ -11,19 +11,18 @@
         GulpLogger;
 
     GulpLogger = function(fnOpts, opts) {
-        var options = typeof fnOpts === 'object' ? fnOpts : opts;
+        var options = typeof fnOpts === 'object' ? fnOpts : opts,
+            beforeComplete = false,
+            afterComplete = false;
 
         if (options) {
             utils.colorsEnabled = typeof options.colors !== 'undefined' ? options.colors : true;
-
-            if (options.before) {
-                console.log(colorTrans(options.before, 'cyan'));
-            }
         }
 
         function loggerEndHandler(flushCallback) {
-            if (options && options.after) {
+            if (options && options.after && !afterComplete) {
                 console.log(colorTrans(options.after, 'cyan'));
+                afterComplete = true;
             }
 
             flushCallback();
@@ -31,6 +30,11 @@
 
         return through.obj(function(file, ext, streamCallback) {
             var filePath = file.path;
+
+            if (options && options.before && !beforeComplete) {
+                console.log(colorTrans(options.before, 'cyan'));
+                beforeComplete = true;
+            }
 
             if (typeof fnOpts === 'function') {
                 processFunction(filePath, fnOpts, opts);
