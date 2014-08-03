@@ -9,7 +9,9 @@
     require('./suffix.js');
     require('./extname.js');
     require('./basename.js');
+    require('./dest.js');
     require('./display.js');
     require('./colors.js');
     require('./function.js');
+    require('./combination.js');
 }());
