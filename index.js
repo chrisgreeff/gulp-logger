@@ -4,6 +4,7 @@
 
     var through = require('through2'),
         utils = require('./lib/utils.js'),
+        log = require('gulp-util').log,
         colorTrans = utils.colorTrans,
         processFilePath = require('./lib/process-file-path.js'),
         processFunction = require('./lib/process-function.js'),
@@ -21,7 +22,7 @@
 
         function loggerEndHandler(flushCallback) {
             if (options && options.after && !afterComplete) {
-                console.log(colorTrans(options.after, 'cyan'));
+                log(colorTrans(options.after, 'cyan'));
                 afterComplete = true;
             }
 
@@ -32,7 +33,7 @@
             var filePath = file.path;
 
             if (options && options.before && !beforeComplete) {
-                console.log(colorTrans(options.before, 'cyan'));
+                log(colorTrans(options.before, 'cyan'));
                 beforeComplete = true;
             }
 
@@ -41,7 +42,7 @@
             } else if (typeof fnOpts === 'object') {
                 processFilePath(filePath, fnOpts);
             } else {
-                console.log(utils.getRelativePath(filePath));
+                log(utils.getRelativePath(filePath));
             }
 
             streamCallback(null, file);

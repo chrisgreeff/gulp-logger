@@ -21,4 +21,13 @@
             suffix: 'suffixTest!'
         });
     });
+
+    test('combination:readme options', function(t) {
+        runOptionsTest(t, {
+            before: 'Starting Gzip...',
+            after: 'Gzipping complete!',
+            extname: '.js.gz',
+            showChange: true
+        });
+    });
 }());

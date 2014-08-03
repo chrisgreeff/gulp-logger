@@ -19,17 +19,35 @@ var gulp = require('gulp'),
     logger = require('gulp-logger');
 
 gulp.task('gzip', function () {
-    gulp.src('./js/**/*.js')
+    gulp.src('**/*.js')
         .pipe(logger({
             before: 'Starting Gzip...',
             after: 'Gzipping complete!',
-            suffix: '.gz'
+            extname: '.js.gz',
+            showChange: true
         }))
         .pipe(gzip());
 });
 ```
 
-# Options
+And a folder structure like this:
+
+```text
+files-to-stream/
+    |- baz/
+    |   |- file.js
+    |   `- wat.js
+    |
+    |- foo.js
+    |- bar.js
+    `- derp.js
+```
+
+Would give you this:
+
+![''](doc/images/basic-usage-example.png)
+
+## Options
 
 #### `before` *String*
 The message you want to show before the chunks are shown.
@@ -58,7 +76,7 @@ A constant value to set as the basename for each filename in the chunk.
 #### `dest` *String*
 A constant value to set as the dest for each filename in the chunk.
 
-#### `colors=true` *Boolean*
+#### `colors` *Boolean*
 Whether or not to turn off colors on the output.
 
 #### `display='rel'` *String*
