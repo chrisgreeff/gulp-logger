@@ -45,7 +45,7 @@ files-to-stream/
 
 Would give you this:
 
-![''](doc/images/basic-usage-example.png)
+![Imgur](http://i.imgur.com/NvKNwAY.png)
 
 ## Options
 
