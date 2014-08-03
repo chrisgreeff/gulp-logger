@@ -12,6 +12,6 @@
         gulp.src(FILES_TO_STREAM)
             .pipe(logger({
                 afterEach: 'afterEachTest!'
-            })).on('data', function () {}).on('end', function () {t.equals(true, true);});
+            })).on('data', function () {}).on('end', function () { t.equals(true, true); });
     });
 }());

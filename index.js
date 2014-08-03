@@ -2,9 +2,7 @@
 (function() {
     'use strict';
 
-    var path = require('path'),
-        through = require('through2'),
-        chalk = require('chalk'),
+    var through = require('through2'),
         utils = require('./lib/utils.js'),
         colorTrans = utils.colorTrans,
         processFilePath = require('./lib/process-file-path.js'),

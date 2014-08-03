@@ -29,6 +29,7 @@
   "devDependencies": {
     "assert": "^1.1.1",
     "colored-tape": "^1.0.1",
-    "gulp": "^3.8.6"
+    "gulp": "^3.8.6",
+    "jslint": "^0.6.1"
   }
 }
