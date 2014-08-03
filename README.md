@@ -55,6 +55,9 @@ A constant value to set as the extension for each filename in the chunk.
 #### `basename` *String*
 A constant value to set as the basename for each filename in the chunk.
 
+#### `dest` *String*
+A constant value to set as the dest for each filename in the chunk.
+
 #### `colors=true` *Boolean*
 Whether or not to turn off colors on the output.
 

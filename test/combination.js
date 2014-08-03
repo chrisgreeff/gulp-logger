@@ -4,7 +4,7 @@
     var test = require('colored-tape'),
         runOptionsTest = require('./common.js').runOptionsTest;
 
-    test('combination:before, after, beforeEach, afterEach', function (t) {
+    test('combination:before, after, beforeEach, afterEach', function(t) {
         runOptionsTest(t, {
             before: 'beforeTest!',
             after: 'afterTest!',
@@ -13,7 +13,7 @@
         });
     });
 
-    test('combination:extname, basename, prefix, suffix', function (t) {
+    test('combination:extname, basename, prefix, suffix', function(t) {
         runOptionsTest(t, {
             extname: 'extnameTest!',
             basename: 'basenameTest!',
