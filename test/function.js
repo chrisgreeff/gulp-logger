@@ -47,4 +47,26 @@
                 display: 'name'
             })).on('data', function () {}).on('end', function () { t.equals(true, true); });
     });
+
+    test('function:before', function (t) {
+        t.plan(1);
+
+        gulp.src(FILES_TO_STREAM)
+            .pipe(logger(function (filePath) {
+                console.log(filePath);
+            }, {
+                before: 'functionBeforeTest!'
+            })).on('data', function () {}).on('end', function () { t.equals(true, true); });
+    });
+
+    test('function:after', function (t) {
+        t.plan(1);
+
+        gulp.src(FILES_TO_STREAM)
+            .pipe(logger(function (filePath) {
+                console.log(filePath);
+            }, {
+                after: 'functionAfterTest!'
+            })).on('data', function () {}).on('end', function () { t.equals(true, true); });
+    });
 }());

@@ -10,25 +10,22 @@
         processFilePath = require('./lib/process-file-path.js'),
         processFunction = require('./lib/process-function.js'),
 
-        beforeComplete = false,
-        colorsEnabled = true,
-
         GulpLogger;
 
     GulpLogger = function(fnOpts, opts) {
+        var options = typeof fnOpts === 'object' ? fnOpts : opts;
 
-        if (typeof fnOpts === 'object' && typeof fnOpts.colors !== 'undefined') {
-            utils.colorsEnabled = fnOpts.colors;
-        }
+        if (options) {
+            utils.colorsEnabled = typeof options.colors !== 'undefined' ? options.colors : true;
 
-        if (typeof fnOpts === 'object' && fnOpts.before && !beforeComplete) {
-            console.log(colorTrans(fnOpts.before, 'cyan'));
-            beforeComplete = true;
+            if (options.before) {
+                console.log(colorTrans(options.before, 'cyan'));
+            }
         }
 
         function loggerEndHandler(flushCallback) {
-            if (typeof fnOpts === 'object' && fnOpts.after) {
-                console.log(colorTrans(fnOpts.after, 'cyan'));
+            if (options && options.after) {
+                console.log(colorTrans(options.after, 'cyan'));
             }
 
             flushCallback();
