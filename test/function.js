@@ -2,71 +2,39 @@
     'use strict';
 
     var test = require('colored-tape'),
-        gulp = require('gulp'),
-        logger = require('../index.js'),
-        FILES_TO_STREAM = 'test/files-to-stream/**/*.js';
+        runFunctionTest = require('./common.js').runFunctionTest;
 
     test('function:default', function (t) {
-        t.plan(1);
-
-        gulp.src(FILES_TO_STREAM)
-            .pipe(logger(function (filePath) {
-                console.log(filePath);
-            })).on('data', function () {}).on('end', function () { t.equals(true, true); });
+        runFunctionTest(t, {});
     });
 
     test('function:relative', function (t) {
-        t.plan(1);
-
-        gulp.src(FILES_TO_STREAM)
-            .pipe(logger(function (filePath) {
-                console.log(filePath);
-            }, {
-                display: 'rel'
-            })).on('data', function () {}).on('end', function () { t.equals(true, true); });
+        runFunctionTest(t, {
+            display: 'rel'
+        });
     });
 
     test('function:absolute', function (t) {
-        t.plan(1);
-
-        gulp.src(FILES_TO_STREAM)
-            .pipe(logger(function (filePath) {
-                console.log(filePath);
-            }, {
-                display: 'abs'
-            })).on('data', function () {}).on('end', function () { t.equals(true, true); });
+        runFunctionTest(t, {
+            display: 'abs'
+        });
     });
 
     test('function:filename', function (t) {
-        t.plan(1);
-
-        gulp.src(FILES_TO_STREAM)
-            .pipe(logger(function (filePath) {
-                console.log(filePath);
-            }, {
-                display: 'name'
-            })).on('data', function () {}).on('end', function () { t.equals(true, true); });
+        runFunctionTest(t, {
+            display: 'name'
+        });
     });
 
     test('function:before', function (t) {
-        t.plan(1);
-
-        gulp.src(FILES_TO_STREAM)
-            .pipe(logger(function (filePath) {
-                console.log(filePath);
-            }, {
-                before: 'functionBeforeTest!'
-            })).on('data', function () {}).on('end', function () { t.equals(true, true); });
+        runFunctionTest(t, {
+            before: 'functionBeforeTest!'
+        });
     });
 
     test('function:after', function (t) {
-        t.plan(1);
-
-        gulp.src(FILES_TO_STREAM)
-            .pipe(logger(function (filePath) {
-                console.log(filePath);
-            }, {
-                after: 'functionAfterTest!'
-            })).on('data', function () {}).on('end', function () { t.equals(true, true); });
+        runFunctionTest(t, {
+            after: 'functionAfterTest!'
+        });
     });
 }());
