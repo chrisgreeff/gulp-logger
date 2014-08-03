@@ -14,4 +14,5 @@
     require('./colors.js');
     require('./function.js');
     require('./combination.js');
+    require('./show-change.js');
 }());
