@@ -6,7 +6,7 @@
 
     test('before', function(t) {
         runOptionsTest(t, {
-            before: 'beforeTest!'
+            before: 'Starting...'
         });
     });
 }());

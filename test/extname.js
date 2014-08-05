@@ -6,7 +6,7 @@
 
     test('extname', function(t) {
         runOptionsTest(t, {
-            extname: 'extnameTest!'
+            extname: '.js.gz'
         });
     });
 }());

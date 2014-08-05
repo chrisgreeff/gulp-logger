@@ -6,7 +6,7 @@
 
     test('prefix', function(t) {
         runOptionsTest(t, {
-            prefix: 'prefixTest!'
+            prefix: 'combined-'
         });
     });
 }());

@@ -6,7 +6,7 @@
 
     test('after', function(t) {
         runOptionsTest(t, {
-            after: 'afterTest!'
+            after: 'Complete!'
         });
     });
 }());

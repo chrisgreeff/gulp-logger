@@ -6,21 +6,21 @@
 
     test('dest:relative', function(t) {
         runOptionsTest(t, {
-            dest: 'dest/test'
+            dest: 'new/location'
         });
     });
 
     test('dest:absolute', function(t) {
         runOptionsTest(t, {
             display: 'abs',
-            dest: 'dest/test'
+            dest: 'new/location'
         });
     });
 
     test('dest:filename', function(t) {
         runOptionsTest(t, {
             display: 'name',
-            dest: 'dest/test'
+            dest: 'new/location'
         });
     });
 }());

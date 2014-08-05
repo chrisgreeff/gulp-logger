@@ -6,7 +6,7 @@
 
     test('beforeEach', function(t) {
         runOptionsTest(t, {
-            beforeEach: 'beforeEachTest!'
+            beforeEach: 'Removing '
         });
     });
 }());

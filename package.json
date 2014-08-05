@@ -1,6 +1,6 @@
 {
   "name": "gulp-logger",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Gulp plugin for logging stream stages, transformation and progress",
   "main": "index.js",
   "scripts": {

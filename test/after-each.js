@@ -6,7 +6,7 @@
 
     test('afterEach', function(t) {
         runOptionsTest(t, {
-            afterEach: 'afterEachTest!'
+            afterEach: ' processed!'
         });
     });
 }());

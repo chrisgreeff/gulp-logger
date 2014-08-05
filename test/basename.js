@@ -6,7 +6,7 @@
 
     test('basename', function(t) {
         runOptionsTest(t, {
-            basename: 'basenameTest!'
+            basename: 'same-name-wow'
         });
     });
 }());

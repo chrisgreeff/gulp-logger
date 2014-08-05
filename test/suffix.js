@@ -6,7 +6,7 @@
 
     test('suffix', function(t) {
         runOptionsTest(t, {
-            suffix: 'suffixTest!'
+            suffix: '.min'
         });
     });
 }());
