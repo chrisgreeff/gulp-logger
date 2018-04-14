@@ -4,7 +4,7 @@
 
     var through = require('through2'),
         utils = require('./lib/utils.js'),
-        log = require('gulp-util').log,
+        log = require('fancy-log'),
         colorTrans = utils.colorTrans,
         processFilePath = require('./lib/process-file-path.js'),
         processFunction = require('./lib/process-function.js'),
